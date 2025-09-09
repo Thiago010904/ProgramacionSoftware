@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,61 @@ namespace Parcial_1
 {
     internal class Program
     {
+        static List<Mascota> mascotas = new List<Mascota>();
         static void Main(string[] args)
         {
+            
         }
+        static void RegistrarNuevaMascota() 
+        {
+            Console.WriteLine("\n--- Registrar Nueva Mascota ---");
+            Console.Write("Tipo de mascota (Perro/Gato/Ave): ");
+            string tipo = Console.ReadLine().Trim().ToLower();
+
+            Console.Write("Nombre: ");
+            string nombre = Console.ReadLine().Trim();
+
+            Console.Write("Raza: ");
+            string raza = Console.ReadLine().Trim().ToLower();
+
+            Console.Write("Edad: ");
+            int edad = int.Parse(Console.ReadLine().Trim());
+
+            Console.Write("Nombre del dueño: ");
+            string nombreDueño = Console.ReadLine().Trim();
+
+            Console.Write("Peso (kg): ");
+            double peso = double.Parse(Console.ReadLine().Trim());
+
+            Console.Write("Tamaño (cm): ");
+            double tamaño = double.Parse(Console.ReadLine().Trim());
+
+            Mascota nuevaMascota = null;
+
+            switch (tipo.ToLower()) 
+            {
+                case "perro":
+                    nuevaMascota = new Perro(nombre, "Canino", raza, nombreDueño, edad, tamaño, peso);
+                    break;
+                case "gato":
+                    nuevaMascota = new Gato(nombre, "Felino", raza, nombreDueño, edad, tamaño, peso);
+                    break;
+                case "ave":
+                    nuevaMascota = new Ave(nombre, "Aviar", raza, nombreDueño, edad, tamaño, peso);
+                    break;
+                default:
+                    Console.WriteLine("Tipo de mascota no reconocido.");
+                    return;
+            }
+            mascotas.Add(nuevaMascota);
+            
+        }
+
         public abstract class Mascota
         {
             private string nombre, especie, raza, nombreDueno;
-            private int edad;
+            private int edad;         
+           
 
             public string Nombre
             {
@@ -51,10 +100,11 @@ namespace Parcial_1
                 Raza = raza;
                 NombreDueno = nombreDueno;
                 Edad = edad;
+               
             }
             //Metodo abstracto
             public abstract String RegistrarConsulta(string Motivo);
-            public abstract String MostrarInformacion();
+            public abstract String MostrarInformacion();            
         }
 
         public class Perro : Mascota
@@ -119,5 +169,7 @@ namespace Parcial_1
             }
 
         }
+
+
     }
 }
