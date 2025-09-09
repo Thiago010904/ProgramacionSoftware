@@ -1,0 +1,23 @@
+# Visual Studio 2022
+.vs/
+*.vsidx
+*.db
+*.db-*
+*.user
+*.suo
+
+# Compilados
+bin/
+obj/
+Debug/
+Release/
+
+# Archivos de usuario
+*.userprefs
+*.suo
+*.user
+*.cache
+
+# SQLite
+*.sqlite
+*.db-journal
