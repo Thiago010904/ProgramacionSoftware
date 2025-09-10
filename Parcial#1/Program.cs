@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -172,4 +173,45 @@ namespace Parcial_1
 
 
     }
-}
+
+    class menu
+    {
+        static List<mascota> mascotas = new List<mascota>();
+        static void Main(string[] args)
+        {
+            int opcion;
+            do
+            {
+                Console.WriteLine("MENU CLINICA VETERINARIA:");
+                Console.WriteLine("1. Registrar nueva mascota");
+                Console.WriteLine("2. Registrar consulta");
+                Console.WriteLine("3. Programar cita de seguimiento");
+                Console.WriteLine("4. mostrar informacion de mascotas");
+                Console.WriteLine("5. Salir");
+                Console.Write("Seleccione una opción: ");
+                opcion = int.Parse(Console.ReadLine());
+                switch (opcion)
+                {
+                    case 1:
+                        RegistrarNuevaMascota();
+                        break;
+                    case 2:
+                        RegistrarConsulta();
+                        break;
+                    case 3:
+                        ProgramarCita();
+
+                        break;
+                    case 4:
+                        MostrarInformacion();
+                        break;
+                    case 5:
+                        Console.WriteLine("Saliendo...");
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida. Intente de nuevo.");
+                        break;
+                }
+            } while (opcion != 5);
+        }
+    }
