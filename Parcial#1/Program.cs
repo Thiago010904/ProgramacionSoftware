@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,9 @@ namespace Parcial_1
         static List<Mascota> mascotas = new List<Mascota>();
         static void Main(string[] args)
         {
-            
+            menu();
         }
-        static void RegistrarNuevaMascota() 
+        static void RegistrarNuevaMascota()
         {
             Console.WriteLine("\n--- Registrar Nueva Mascota ---");
             Console.Write("Tipo de mascota (Perro/Gato/Ave): ");
@@ -40,7 +41,7 @@ namespace Parcial_1
 
             Mascota nuevaMascota = null;
 
-            switch (tipo.ToLower()) 
+            switch (tipo.ToLower())
             {
                 case "perro":
                     nuevaMascota = new Perro(nombre, "Canino", raza, nombreDueño, edad, tamaño, peso);
@@ -56,14 +57,30 @@ namespace Parcial_1
                     return;
             }
             mascotas.Add(nuevaMascota);
-            
+            nuevaMascota.AuditarAccion("Registro", $"Mascota {nombre} registrada exitosamente.");
+            Console.WriteLine("Mascota registrada exitosamente");
         }
 
-        public abstract class Mascota
+        // Enumeracion para estado de salud
+        public enum EstadoSalud
+        {
+            Saludable,
+            EnTratamiento,
+            Urgencia
+        }
+
+        //Clase  de la Interfaz Auditable
+        public interface IAuditable
+        {
+            void AuditarAccion(string tipo, string descripcion);
+        }
+
+        public abstract class Mascota : IAuditable
         {
             private string nombre, especie, raza, nombreDueno;
-            private int edad;         
-           
+            private int edad;
+            private EstadoSalud estadoSalud;
+
 
             public string Nombre
             {
@@ -92,19 +109,33 @@ namespace Parcial_1
                 set => edad = value;
             }
 
+            public EstadoSalud EstadoSalud
+            {
+                get => estadoSalud;
+                set => estadoSalud = value;
+            }
+
             //Constructor
-            public Mascota(string nombre, string especie, string raza, string nombreDueno, int edad)
+            public Mascota(string nombre, string especie, string raza, string nombreDueño, int edad)
             {
                 Nombre = nombre;
                 Especie = especie;
                 Raza = raza;
                 NombreDueno = nombreDueno;
                 Edad = edad;
-               
+                EstadoSalud = EstadoSalud.Saludable; //Estado inicial
+
             }
             //Metodo abstracto
             public abstract String RegistrarConsulta(string Motivo);
-            public abstract String MostrarInformacion();            
+            public abstract String MostrarInformacion();
+
+            //Implementacion de la interfaz IAuditable
+            public void AuditarAccion(string tipo, string descripcion)
+            {
+                string mensajeAuditoria = $"[{DateTime.Now}] {tipo}: {descripcion}";
+                Console.WriteLine($"AUDITORIA: {mensajeAuditoria}");
+            }
         }
 
         public class Perro : Mascota
@@ -170,46 +201,43 @@ namespace Parcial_1
 
         }
 
+        static void menu()
+        {            
+                int opcion;
+                do
+                {
+                    Console.WriteLine("MENU CLINICA VETERINARIA:");
+                    Console.WriteLine("1. Registrar nueva mascota");
+                    Console.WriteLine("2. Registrar consulta");
+                    Console.WriteLine("3. Programar cita de seguimiento");
+                    Console.WriteLine("4. mostrar informacion de mascotas");
+                    Console.WriteLine("5. Salir");
+                    Console.Write("Seleccione una opción: ");
+                    opcion = int.Parse(Console.ReadLine());
+                    switch (opcion)
+                    {
+                        case 1:
+                            RegistrarNuevaMascota();
+                            break;
+                        case 2:
+                            //RegistrarConsulta();
+                            break;
+                        case 3:
+                            //ProgramarCita();
 
+                            break;
+                        case 4:
+                            //MostrarInformacion();
+                            break;
+                        case 5:
+                            Console.WriteLine("Saliendo...");
+                            break;
+                        default:
+                            Console.WriteLine("Opción no válida. Intente de nuevo.");
+                            break;
+                    }
+                } while (opcion != 5);
+            }
+        }
     }
 
-    class menu
-    {
-        static List<mascota> mascotas = new List<mascota>();
-        static void Main(string[] args)
-        {
-            int opcion;
-            do
-            {
-                Console.WriteLine("MENU CLINICA VETERINARIA:");
-                Console.WriteLine("1. Registrar nueva mascota");
-                Console.WriteLine("2. Registrar consulta");
-                Console.WriteLine("3. Programar cita de seguimiento");
-                Console.WriteLine("4. mostrar informacion de mascotas");
-                Console.WriteLine("5. Salir");
-                Console.Write("Seleccione una opción: ");
-                opcion = int.Parse(Console.ReadLine());
-                switch (opcion)
-                {
-                    case 1:
-                        RegistrarNuevaMascota();
-                        break;
-                    case 2:
-                        RegistrarConsulta();
-                        break;
-                    case 3:
-                        ProgramarCita();
-
-                        break;
-                    case 4:
-                        MostrarInformacion();
-                        break;
-                    case 5:
-                        Console.WriteLine("Saliendo...");
-                        break;
-                    default:
-                        Console.WriteLine("Opción no válida. Intente de nuevo.");
-                        break;
-                }
-            } while (opcion != 5);
-        }
