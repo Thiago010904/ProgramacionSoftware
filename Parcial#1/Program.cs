@@ -56,13 +56,29 @@ namespace Parcial_1
                     return;
             }
             mascotas.Add(nuevaMascota);
-            
+            nuevaMascota.AuditarAccion("Registro", $"Mascota {nombre} registrada exitosamente.");
+            Console.WriteLine("Mascota registrada exitosamente");            
         }
 
-        public abstract class Mascota
+        // Enumeracion para estado de salud
+        public enum EstadoSalud 
+        {
+            Saludable,
+            EnTratamiento,
+            Urgencia
+        }
+        
+        //Clase  de la Interfaz Auditable
+        public interface IAuditable
+        {
+            void AuditarAccion(string tipo, string descripcion);
+        }
+
+        public abstract class Mascota : IAuditable
         {
             private string nombre, especie, raza, nombreDueno;
-            private int edad;         
+            private int edad;
+            private  EstadoSalud estadoSalud;
            
 
             public string Nombre
@@ -92,19 +108,33 @@ namespace Parcial_1
                 set => edad = value;
             }
 
+            public EstadoSalud EstadoSalud
+            {
+                get => estadoSalud;
+                set => estadoSalud = value;
+            }
+
             //Constructor
-            public Mascota(string nombre, string especie, string raza, string nombreDueno, int edad)
+            public Mascota(string nombre, string especie, string raza, string nombreDueño, int edad)
             {
                 Nombre = nombre;
                 Especie = especie;
                 Raza = raza;
                 NombreDueno = nombreDueno;
                 Edad = edad;
-               
+                EstadoSalud = EstadoSalud.Saludable; //Estado inicial
+
             }
             //Metodo abstracto
             public abstract String RegistrarConsulta(string Motivo);
-            public abstract String MostrarInformacion();            
+            public abstract String MostrarInformacion();
+
+            //Implementacion de la interfaz IAuditable
+            public void AuditarAccion(string tipo, string descripcion)
+            {
+                string mensajeAuditoria = $"[{DateTime.Now}] {tipo}: {descripcion}";
+                Console.WriteLine($"AUDITORIA: {mensajeAuditoria}");
+            }
         }
 
         public class Perro : Mascota
@@ -169,6 +199,10 @@ namespace Parcial_1
             }
 
         }
+
+        
+
+        
 
 
     }
