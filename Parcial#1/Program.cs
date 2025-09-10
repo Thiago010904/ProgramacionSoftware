@@ -13,9 +13,9 @@ namespace Parcial_1
         static List<Mascota> mascotas = new List<Mascota>();
         static void Main(string[] args)
         {
-            
+            menu();
         }
-        static void RegistrarNuevaMascota() 
+        static void RegistrarNuevaMascota()
         {
             Console.WriteLine("\n--- Registrar Nueva Mascota ---");
             Console.Write("Tipo de mascota (Perro/Gato/Ave): ");
@@ -41,7 +41,7 @@ namespace Parcial_1
 
             Mascota nuevaMascota = null;
 
-            switch (tipo.ToLower()) 
+            switch (tipo.ToLower())
             {
                 case "perro":
                     nuevaMascota = new Perro(nombre, "Canino", raza, nombreDueño, edad, tamaño, peso);
@@ -58,17 +58,17 @@ namespace Parcial_1
             }
             mascotas.Add(nuevaMascota);
             nuevaMascota.AuditarAccion("Registro", $"Mascota {nombre} registrada exitosamente.");
-            Console.WriteLine("Mascota registrada exitosamente");            
+            Console.WriteLine("Mascota registrada exitosamente");
         }
 
         // Enumeracion para estado de salud
-        public enum EstadoSalud 
+        public enum EstadoSalud
         {
             Saludable,
             EnTratamiento,
             Urgencia
         }
-        
+
         //Clase  de la Interfaz Auditable
         public interface IAuditable
         {
@@ -79,8 +79,8 @@ namespace Parcial_1
         {
             private string nombre, especie, raza, nombreDueno;
             private int edad;
-            private  EstadoSalud estadoSalud;
-           
+            private EstadoSalud estadoSalud;
+
 
             public string Nombre
             {
@@ -201,51 +201,43 @@ namespace Parcial_1
 
         }
 
-        
-
-        
-
-
-    }
-
-    class menu
-    {
-        static List<mascota> mascotas = new List<mascota>();
-        static void Main(string[] args)
-        {
-            int opcion;
-            do
-            {
-                Console.WriteLine("MENU CLINICA VETERINARIA:");
-                Console.WriteLine("1. Registrar nueva mascota");
-                Console.WriteLine("2. Registrar consulta");
-                Console.WriteLine("3. Programar cita de seguimiento");
-                Console.WriteLine("4. mostrar informacion de mascotas");
-                Console.WriteLine("5. Salir");
-                Console.Write("Seleccione una opción: ");
-                opcion = int.Parse(Console.ReadLine());
-                switch (opcion)
+        static void menu()
+        {            
+                int opcion;
+                do
                 {
-                    case 1:
-                        RegistrarNuevaMascota();
-                        break;
-                    case 2:
-                        RegistrarConsulta();
-                        break;
-                    case 3:
-                        ProgramarCita();
+                    Console.WriteLine("MENU CLINICA VETERINARIA:");
+                    Console.WriteLine("1. Registrar nueva mascota");
+                    Console.WriteLine("2. Registrar consulta");
+                    Console.WriteLine("3. Programar cita de seguimiento");
+                    Console.WriteLine("4. mostrar informacion de mascotas");
+                    Console.WriteLine("5. Salir");
+                    Console.Write("Seleccione una opción: ");
+                    opcion = int.Parse(Console.ReadLine());
+                    switch (opcion)
+                    {
+                        case 1:
+                            RegistrarNuevaMascota();
+                            break;
+                        case 2:
+                            //RegistrarConsulta();
+                            break;
+                        case 3:
+                            //ProgramarCita();
 
-                        break;
-                    case 4:
-                        MostrarInformacion();
-                        break;
-                    case 5:
-                        Console.WriteLine("Saliendo...");
-                        break;
-                    default:
-                        Console.WriteLine("Opción no válida. Intente de nuevo.");
-                        break;
-                }
-            } while (opcion != 5);
+                            break;
+                        case 4:
+                            //MostrarInformacion();
+                            break;
+                        case 5:
+                            Console.WriteLine("Saliendo...");
+                            break;
+                        default:
+                            Console.WriteLine("Opción no válida. Intente de nuevo.");
+                            break;
+                    }
+                } while (opcion != 5);
+            }
         }
     }
+
