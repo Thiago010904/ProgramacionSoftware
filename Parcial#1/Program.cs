@@ -206,15 +206,22 @@ namespace Parcial_1
                 int opcion;
                 do
                 {
-                    Console.WriteLine("MENU CLINICA VETERINARIA:");
+                    Console.WriteLine("\n MENU CLINICA VETERINARIA:");
                     Console.WriteLine("1. Registrar nueva mascota");
                     Console.WriteLine("2. Registrar consulta");
                     Console.WriteLine("3. Programar cita de seguimiento");
                     Console.WriteLine("4. mostrar informacion de mascotas");
                     Console.WriteLine("5. Salir");
                     Console.Write("Seleccione una opción: ");
-                    opcion = int.Parse(Console.ReadLine());
-                    switch (opcion)
+
+               
+                    if (!int.TryParse(Console.ReadLine(), out opcion))
+                    {
+                        Console.WriteLine("ingrese un numero valido");
+                    continue;
+                }
+
+                switch (opcion)
                     {
                         case 1:
                             RegistrarNuevaMascota();
@@ -233,7 +240,7 @@ namespace Parcial_1
                             Console.WriteLine("Saliendo...");
                             break;
                         default:
-                            Console.WriteLine("Opción no válida. Intente de nuevo.");
+                            Console.WriteLine("ingrese un numero valido");
                             break;
                     }
                 } while (opcion != 5);
