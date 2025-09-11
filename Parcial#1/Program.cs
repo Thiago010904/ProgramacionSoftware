@@ -255,13 +255,14 @@ namespace Parcial_1
             Console.Write("Edad: "); int edad = int.Parse(Console.ReadLine());
             Console.Write("Nombre del dueño: "); String nombreDueno = Console.ReadLine();
 
-            Mascota nuevaMascota = tipo switch
-            {
-                1 => new Perro(nombre, "Canino", raza, nombreDueno, edad, 0, 0),
-                2 => new Gato(nombre, "Felino", raza, nombreDueno, edad, 0, 0),
-                3 => new Ave(nombre, "Aviar", raza, nombreDueno, edad, 0, 0),
-                _ => null
-            };
+            Mascota nuevaMascota = null;
+            
+            if (tipo ==1)
+                    nuevaMascota = new Perro(nombre, "Canino", raza, nombreDueno, edad, 0, 0);
+            else if (tipo ==2)
+                    nuevaMascota = new Gato(nombre, "Felino", raza, nombreDueno, edad, 0, 0);
+            else if (tipo ==3)
+                    nuevaMascota = new Ave(nombre, "Aviar", raza, nombreDueno, edad, 0, 0);
 
             if (nuevaMascota != null)
             {
@@ -316,6 +317,6 @@ namespace Parcial_1
     }
 }
 
-        
-    
+
+
 
