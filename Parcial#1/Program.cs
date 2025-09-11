@@ -15,51 +15,7 @@ namespace Parcial_1
         {
             menu();
         }
-        static void RegistrarNuevaMascota()
-        {
-            Console.WriteLine("\n--- Registrar Nueva Mascota ---");
-            Console.Write("Tipo de mascota (Perro/Gato/Ave): ");
-            string tipo = Console.ReadLine().Trim().ToLower();
-
-            Console.Write("Nombre: ");
-            string nombre = Console.ReadLine().Trim();
-
-            Console.Write("Raza: ");
-            string raza = Console.ReadLine().Trim().ToLower();
-
-            Console.Write("Edad: ");
-            int edad = int.Parse(Console.ReadLine().Trim());
-
-            Console.Write("Nombre del dueño: ");
-            string nombreDueño = Console.ReadLine().Trim();
-
-            Console.Write("Peso (kg): ");
-            double peso = double.Parse(Console.ReadLine().Trim());
-
-            Console.Write("Tamaño (cm): ");
-            double tamaño = double.Parse(Console.ReadLine().Trim());
-
-            Mascota nuevaMascota = null;
-
-            switch (tipo.ToLower())
-            {
-                case "perro":
-                    nuevaMascota = new Perro(nombre, "Canino", raza, nombreDueño, edad, tamaño, peso);
-                    break;
-                case "gato":
-                    nuevaMascota = new Gato(nombre, "Felino", raza, nombreDueño, edad, tamaño, peso);
-                    break;
-                case "ave":
-                    nuevaMascota = new Ave(nombre, "Aviar", raza, nombreDueño, edad, tamaño, peso);
-                    break;
-                default:
-                    Console.WriteLine("Tipo de mascota no reconocido.");
-                    return;
-            }
-            mascotas.Add(nuevaMascota);
-            nuevaMascota.AuditarAccion("Registro", $"Mascota {nombre} registrada exitosamente.");
-            Console.WriteLine("Mascota registrada exitosamente");
-        }
+        
 
         // Enumeracion para estado de salud
         public enum EstadoSalud
@@ -245,32 +201,50 @@ namespace Parcial_1
                     }
                 } while (opcion != 5);
             }
-        static void RegistrarMascota()
+        static void RegistrarNuevaMascota()
         {
-            Console.WriteLine("Ingresa tipo de mascota: 1.Perro, 2.Gato, 3.Ave");
-            int tipo = int.Parse(Console.ReadLine());
+            Console.WriteLine("\n--- Registrar Nueva Mascota ---");
+            Console.Write("Tipo de mascota (Perro/Gato/Ave): ");
+            string tipo = Console.ReadLine().Trim().ToLower();
 
-            Console.Write("Nombre: "); String nombre = Console.ReadLine();
-            Console.Write("Raza/Especie: "); String raza = Console.ReadLine();
-            Console.Write("Edad: "); int edad = int.Parse(Console.ReadLine());
-            Console.Write("Nombre del dueño: "); String nombreDueno = Console.ReadLine();
+            Console.Write("Nombre: ");
+            string nombre = Console.ReadLine().Trim();
+
+            Console.Write("Raza: ");
+            string raza = Console.ReadLine().Trim().ToLower();
+
+            Console.Write("Edad: ");
+            int edad = int.Parse(Console.ReadLine().Trim());
+
+            Console.Write("Nombre del dueño: ");
+            string nombreDueño = Console.ReadLine().Trim();
+
+            Console.Write("Peso (kg): ");
+            double peso = double.Parse(Console.ReadLine().Trim());
+
+            Console.Write("Tamaño (cm): ");
+            double tamaño = double.Parse(Console.ReadLine().Trim());
 
             Mascota nuevaMascota = null;
-            
-            if (tipo ==1)
-                    nuevaMascota = new Perro(nombre, "Canino", raza, nombreDueno, edad, 0, 0);
-            else if (tipo ==2)
-                    nuevaMascota = new Gato(nombre, "Felino", raza, nombreDueno, edad, 0, 0);
-            else if (tipo ==3)
-                    nuevaMascota = new Ave(nombre, "Aviar", raza, nombreDueno, edad, 0, 0);
 
-            if (nuevaMascota != null)
+            switch (tipo.ToLower())
             {
-                mascotas.Add(nuevaMascota);
-                nuevaMascota.AuditarAccion("Registro", $"Mascota {nombre} registrada exitosamente.");
-                Console.WriteLine("Mascota registrada exitosamente.");
+                case "perro":
+                    nuevaMascota = new Perro(nombre, "Canino", raza, nombreDueño, edad, tamaño, peso);
+                    break;
+                case "gato":
+                    nuevaMascota = new Gato(nombre, "Felino", raza, nombreDueño, edad, tamaño, peso);
+                    break;
+                case "ave":
+                    nuevaMascota = new Ave(nombre, "Aviar", raza, nombreDueño, edad, tamaño, peso);
+                    break;
+                default:
+                    Console.WriteLine("Tipo de mascota no reconocido.");
+                    return;
             }
-
+            mascotas.Add(nuevaMascota);
+            nuevaMascota.AuditarAccion("Registro", $"Mascota {nombre} registrada exitosamente.");
+            Console.WriteLine("Mascota registrada exitosamente");
         }
 
         static void RegistrarConsulta()
