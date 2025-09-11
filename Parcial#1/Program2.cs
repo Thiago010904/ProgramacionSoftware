@@ -108,11 +108,82 @@ namespace Punto28
                         break;
 
 
-                        //Seguir con el switch
+                    case "2":
+                        Console.Write("Ingrese el número del pedido: ");
+                        int numPedidoPlato = int.Parse(Console.ReadLine());
+                        var pedidoPlato = pedidos.Find(p => p.NumPedido == numPedidoPlato);
+                        if (pedidoPlato != null)
+                        {
+                            Console.Write("Nombre del plato: ");
+                            string plato = Console.ReadLine();
+                            Console.Write("Precio del plato: ");
+                            decimal precio = decimal.Parse(Console.ReadLine());
+                            pedidoPlato.AgregarPlato(plato, precio);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Pedido no encontrado.");
+                        }
+                        break;
 
+                    case "3":
+                        Console.Write("Ingrese el número del pedido: ");
+                        int numPedidoTotal = int.Parse(Console.ReadLine());
+                        var pedidoTotal = pedidos.Find(p => p.NumPedido == numPedidoTotal);
+                        if (pedidoTotal != null)
+                        {
+                            pedidoTotal.CalcularTotal();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Pedido no encontrado.");
+                        }
+                        break;
+
+                    case "4":
+                        Console.Write("Ingrese el número del pedido: ");
+                        int numPedidoEstado = int.Parse(Console.ReadLine());
+                        var pedidoEstado = pedidos.Find(p => p.NumPedido == numPedidoEstado);
+                        if (pedidoEstado != null)
+                        {
+                            Console.WriteLine("Seleccione estado: 0=Pendiente, 1=EnPreparacion, 2=Entregado");
+                            int estado = int.Parse(Console.ReadLine());
+                            pedidoEstado.Estado = (EstadoPedido)estado;
+                            pedidoEstado.AuditarPedido(pedidoEstado.Estado.ToString(), pedidoEstado.Total);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Pedido no encontrado.");
+                        }
+                        break;
+
+                    case "5":
+                        Console.Write("Ingrese el número del pedido: ");
+                        int numPedidoInfo = int.Parse(Console.ReadLine());
+                        var pedidoInfo = pedidos.Find(p => p.NumPedido == numPedidoInfo);
+                        if (pedidoInfo != null)
+                        {
+                            pedidoInfo.MostrarInformacion();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Pedido no encontrado.");
+                        }
+                        break;
+
+                    case "6":
+                        salir = true;
+                        Console.WriteLine("Saliendo del sistema...");
+                        break;
+
+                    default:
+                        Console.WriteLine("Opción no válida.");
+                        break;
                 }
 
             }
+
+            
 
         }
     }
