@@ -245,6 +245,74 @@ namespace Parcial_1
                     }
                 } while (opcion != 5);
             }
+        static void RegistrarMascota()
+        {
+            Console.WriteLine("Ingresa tipo de mascota: 1.Perro, 2.Gato, 3.Ave");
+            int tipo = int.Parse(Console.ReadLine());
+
+            Console.Write("Nombre: "); String nombre = Console.ReadLine();
+            Console.Write("Raza/Especie: "); String raza = Console.ReadLine();
+            Console.Write("Edad: "); int edad = int.Parse(Console.ReadLine());
+            Console.Write("Nombre del dueño: "); String nombreDueno = Console.ReadLine();
+
+            Mascota nuevaMascota = tipo switch
+            {
+                1 => new Perro(nombre, "Canino", raza, nombreDueno, edad, 0, 0),
+                2 => new Gato(nombre, "Felino", raza, nombreDueno, edad, 0, 0),
+                3 => new Ave(nombre, "Aviar", raza, nombreDueno, edad, 0, 0),
+                _ => null
+            };
+
+            if (nuevaMascota != null)
+            {
+                mascotas.Add(nuevaMascota);
+                nuevaMascota.AuditarAccion("Registro", $"Mascota {nombre} registrada exitosamente.");
+                Console.WriteLine("Mascota registrada exitosamente.");
+            }
+
         }
+
+        static void RegistrarConsulta()
+        {
+            Console.Write("Nombre de la mascota: ");
+            string nombre = Console.ReadLine();
+            var mascota = mascotas.Find(M => M.Nombre == nombre);
+            if (mascota != null)
+            {
+                Console.Write("Motivo de la consulta: ");
+                string motivo = Console.ReadLine();
+                mascota.RegistrarConsulta(motivo);
+            }
+            else
+            {
+                Console.WriteLine("Mascota no encontrada.");
+            }
+        }
+
+        static void ProgramarCita()
+        {
+            Console.Write("Nombre de la mascota: ");
+            string nombre = Console.ReadLine();
+            var mascota = mascotas.Find(m => m.Nombre == nombre);
+            if (mascota != null)
+            {
+                Console.Write("Descripción de la cita: ");
+                string desc = Console.ReadLine();
+                mascota.AuditarAccion("Cita", $"Cita programada para {nombre}: {desc}");
+            }
+            else
+            {
+                Console.WriteLine("Mascota no encontrada.");
+            }
+        }
+
+        static void MostrarInformacion()
+        {
+            foreach (var mascota in mascotas)
+            {
+                Console.WriteLine(mascota.MostrarInformacion());
+            }
+        }
+    }
     }
 
