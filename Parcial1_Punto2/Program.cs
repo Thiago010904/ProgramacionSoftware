@@ -29,7 +29,7 @@ namespace Punto28
 
         public Pedido()
         {
-            Platos= new List<(string Plato, decimal)>();
+            Platos = new List<(string Plato, decimal)>();
         }
 
         public abstract void AgregarPlato(string plato, decimal precio);
@@ -60,7 +60,7 @@ namespace Punto28
                 Total += plato.Precio;
             }
             Console.WriteLine($"Total calculado: {Total:C}");
-        } 
+        }
         public override void MostrarInformacion()
         {
             Console.WriteLine($"\n Pedido #: {NumPedido}");
@@ -85,9 +85,9 @@ namespace Punto28
     {
         static void Main()
         {
-           List<PedidoRestaurante> pedidos = new List<PedidoRestaurante>();
-           int conPedidos = 1;
-           bool salir = false;
+            List<PedidoRestaurante> pedidos = new List<PedidoRestaurante>();
+            int conPedidos = 1;
+            bool salir = false;
 
             while (!salir)
             {
@@ -187,7 +187,7 @@ namespace Punto28
 
             }
 
-            
+
 
         }
     }
