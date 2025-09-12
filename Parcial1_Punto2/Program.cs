@@ -150,7 +150,7 @@ namespace Punto28
                         var pedidoEstado = pedidos.Find(p => p.NumPedido == numPedidoEstado);
                         if (pedidoEstado != null)
                         {
-                            Console.WriteLine("Seleccione estado: 0=Pendiente, 1=EnPreparacion, 2=Entregado");
+                            Console.WriteLine("Seleccione estado: 0 = Pendiente, 1 = EnPreparacion, 2 = Entregado");
                             int estado = int.Parse(Console.ReadLine());
                             pedidoEstado.Estado = (EstadoPedido)estado;
                             pedidoEstado.AuditarPedido(pedidoEstado.Estado.ToString(), pedidoEstado.Total);
