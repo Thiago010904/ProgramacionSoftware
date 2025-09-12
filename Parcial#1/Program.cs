@@ -36,8 +36,19 @@ namespace Parcial_1
             private string nombre, especie, raza, nombreDueno;
             private int edad;
             private EstadoSalud estadoSalud;
+            private List<string> historialConsultas;
+            private List<string> citasSeguimiento;
 
-
+            public List<string> HistorialConsultas
+            {
+                get => historialConsultas;
+                set => historialConsultas = value;
+            }
+            public List<string> CitasSeguimiento
+            {
+                get => citasSeguimiento;
+                set => citasSeguimiento = value;
+            }
             public string Nombre
             {
                 get => nombre;
@@ -72,7 +83,7 @@ namespace Parcial_1
             }
 
             //Constructor
-            public Mascota(string nombre, string especie, string raza, string nombreDueño, int edad)
+            public Mascota(string nombre, string especie, string raza, string nombreDueno, int edad)
             {
                 Nombre = nombre;
                 Especie = especie;
@@ -80,6 +91,8 @@ namespace Parcial_1
                 NombreDueno = nombreDueno;
                 Edad = edad;
                 EstadoSalud = EstadoSalud.Saludable; //Estado inicial
+                HistorialConsultas = new List<string>();
+                CitasSeguimiento = new List<string>();
 
             }
             //Metodo abstracto
@@ -99,41 +112,63 @@ namespace Parcial_1
             private double peso, tamaño;
 
             //Constructor
-            public Perro(string nombre, string especie, string raza, string nombreDueno, int edad, double tamaño, double peso)
+            public Perro(string nombre, string especie, string raza, string nombreDueno, int edad, double peso, double tamaño)
                 : base(nombre, especie, raza, nombreDueno, edad)
             {
-                this.tamaño = tamaño;
                 this.peso = peso;
+                this.tamaño = tamaño;
             }
             //Implementacion de los metodos abstractos
             public override string RegistrarConsulta(string Motivo)
             {
-                return $"Consulta registrada para el perro {Nombre} por el motivo: {Motivo}";
+                string consulta = $"Consulta registrada para el perro {Nombre} por el motivo: {Motivo}";
+                HistorialConsultas.Add(consulta);
+                AuditarAccion("Consulta", consulta);
+                return consulta;
             }
             public override string MostrarInformacion()
             {
-                return $"Perro: {Nombre}, Especie: {Especie}, Raza: {Raza}, Dueño: {NombreDueno}, Edad: {Edad}, Tamaño: {tamaño}, Peso: {peso}";
-            }
+                return $"PERRO             : \n" +
+                            $"Nombre            : {Nombre}\n" +
+                            $"Especie           : {Especie}\n" +
+                            $"Raza              : {Raza}\n" +
+                            $"Dueño             : {NombreDueno}\n" +
+                            $"Edad              : {Edad}\n" +
+                            $"Tamaño            : {tamaño} cm\n" +
+                            $"Peso              : {peso} kg\n" +
+                            $"Estado de Salud   : {EstadoSalud}\n";
+            }        
         }
         public class Gato : Mascota
         {
             private double peso, tamaño;
             //Constructor
-            public Gato(string nombre, string especie, string raza, string nombreDueno, int edad, double tamaño, double peso)
+            public Gato(string nombre, string especie, string raza, string nombreDueno, int edad, double peso, double tamaño)
                 : base(nombre, especie, raza, nombreDueno, edad)
             {
-                this.tamaño = tamaño;
                 this.peso = peso;
+                this.tamaño = tamaño;
 
             }
             //Implementacion de los metodos abstractos
             public override string RegistrarConsulta(string Motivo)
             {
-                return $"Consulta registrada para el gato {Nombre} por el motivo: {Motivo}";
+                string consulta = $"Consulta registrada para el gato {Nombre} por el motivo: {Motivo}";
+                HistorialConsultas.Add(consulta);
+                AuditarAccion("Consulta", consulta);
+                return consulta;
             }
             public override string MostrarInformacion()
             {
-                return $"Gato: {Nombre}, Especie: {Especie}, Raza: {Raza}, Dueño: {NombreDueno}, Edad: {Edad}, Tamaño: {tamaño}, Peso: {peso}";
+                return      $"GATO              : \n" +
+                            $"Nombre            : {Nombre}\n" +
+                            $"Especie           : {Especie}\n" +
+                            $"Raza              : {Raza}\n" +
+                            $"Dueño             : {NombreDueno}\n" +
+                            $"Edad              : {Edad}\n" +
+                            $"Tamaño            : {tamaño} cm\n" +
+                            $"Peso              : {peso} kg\n" +
+                            $"Estado de Salud   : {EstadoSalud}\n";
             }
         }
         public class Ave : Mascota
@@ -142,17 +177,28 @@ namespace Parcial_1
             public Ave(string nombre, string especie, string raza, string nombreDueno, int edad, double peso, double tamaño)
                 : base(nombre, especie, raza, nombreDueno, edad)
             {
-                this.tamaño = tamaño;
                 this.peso = peso;
+                this.tamaño = tamaño;
             }
 
             public override string RegistrarConsulta(string Motivo)
             {
-                return $"Consulta registrada para el Ave {Nombre} por el motivo: {Motivo}";
+                string consulta = $"Consulta registrada para el Ave {Nombre} por el motivo: {Motivo}";
+                HistorialConsultas.Add(consulta);
+                AuditarAccion("Consulta", consulta);
+                return consulta;
             }
             public override string MostrarInformacion()
             {
-                return $"Ave: {Nombre}, Especie: {Especie}, Raza: {Raza}, Dueño: {NombreDueno}, Edad: {Edad}, Tamaño: {tamaño}, Peso: {peso}";
+                return      $"AVE               : \n" +
+                            $"Nombre            : {Nombre}\n" +
+                            $"Especie           : {Especie}\n" +
+                            $"Raza              : {Raza}\n" +
+                            $"Dueño             : {NombreDueno}\n" +
+                            $"Edad              : {Edad}\n" +
+                            $"Tamaño            : {tamaño} cm\n" +
+                            $"Peso              : {peso} kg\n" +
+                            $"Estado de Salud   : {EstadoSalud}\n";
             }
 
         }
@@ -214,29 +260,38 @@ namespace Parcial_1
             string raza = Console.ReadLine().Trim().ToLower();
 
             Console.Write("Edad: ");
-            int edad = int.Parse(Console.ReadLine().Trim());
-
+            if (!int.TryParse(Console.ReadLine().Trim(), out int edad) || edad < 0)
+            {
+                Console.WriteLine("Edad invalida. Debe ser un numero entero no negativo.");
+                return;
+            }
             Console.Write("Nombre del dueño: ");
             string nombreDueño = Console.ReadLine().Trim();
 
             Console.Write("Peso (kg): ");
-            double peso = double.Parse(Console.ReadLine().Trim());
-
+            if (!double.TryParse(Console.ReadLine().Trim(), out double peso))  // ← Línea donde se lee el peso
+            {
+                Console.WriteLine("Peso no válido");
+                return;
+            }
             Console.Write("Tamaño (cm): ");
-            double tamaño = double.Parse(Console.ReadLine().Trim());
-
+            if (!double.TryParse(Console.ReadLine().Trim(), out double tamaño))  // ← Línea donde se lee el tamaño
+            {
+                Console.WriteLine("Tamaño no válido");
+                return;
+            }
             Mascota nuevaMascota = null;
 
             switch (tipo.ToLower())
             {
                 case "perro":
-                    nuevaMascota = new Perro(nombre, "Canino", raza, nombreDueño, edad, tamaño, peso);
+                    nuevaMascota = new Perro(nombre, "Canino", raza, nombreDueño, edad, peso, tamaño);
                     break;
                 case "gato":
-                    nuevaMascota = new Gato(nombre, "Felino", raza, nombreDueño, edad, tamaño, peso);
+                    nuevaMascota = new Gato(nombre, "Felino", raza, nombreDueño, edad, peso, tamaño);
                     break;
                 case "ave":
-                    nuevaMascota = new Ave(nombre, "Aviar", raza, nombreDueño, edad, tamaño, peso);
+                    nuevaMascota = new Ave(nombre, "Ave", raza, nombreDueño, edad, peso, tamaño);
                     break;
                 default:
                     Console.WriteLine("Tipo de mascota no reconocido.");
@@ -273,6 +328,8 @@ namespace Parcial_1
             {
                 Console.Write("Descripción de la cita: ");
                 string desc = Console.ReadLine();
+                string cita = $"Cita programada para {nombre}: {desc}";
+                mascota.CitasSeguimiento.Add(cita);
                 mascota.AuditarAccion("Cita", $"Cita programada para {nombre}: {desc}");
             }
             else
@@ -283,6 +340,11 @@ namespace Parcial_1
 
         static void MostrarInformacion()
         {
+            if (mascotas.Count == 0)
+            {
+                Console.WriteLine("No hay mascotas registradas.");
+                return;
+            }
             foreach (var mascota in mascotas)
             {
                 Console.WriteLine(mascota.MostrarInformacion());
