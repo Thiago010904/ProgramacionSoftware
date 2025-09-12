@@ -269,13 +269,13 @@ namespace Parcial_1
             string nombreDueño = Console.ReadLine().Trim();
 
             Console.Write("Peso (kg): ");
-            if (!double.TryParse(Console.ReadLine().Trim(), out double peso))  // ← Línea donde se lee el peso
+            if (!double.TryParse(Console.ReadLine().Trim(), out double peso))  
             {
                 Console.WriteLine("Peso no válido");
                 return;
             }
             Console.Write("Tamaño (cm): ");
-            if (!double.TryParse(Console.ReadLine().Trim(), out double tamaño))  // ← Línea donde se lee el tamaño
+            if (!double.TryParse(Console.ReadLine().Trim(), out double tamaño))  
             {
                 Console.WriteLine("Tamaño no válido");
                 return;
