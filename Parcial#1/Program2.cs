@@ -105,6 +105,10 @@ namespace Punto28
                 {
                     case "1":
                         Console.Write("Ingrese el nombre del cliente: ");
+                        string cliente = Console.ReadLine();
+                        var nuevoPedido = new PedidoRestaurante(conPedidos++, cliente);
+                        pedidos.Add(nuevoPedido);
+                        Console.WriteLine($"Pedido #{nuevoPedido.NumPedido} registrado para {cliente}.");
                         break;
 
 
